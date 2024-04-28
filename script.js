@@ -92,32 +92,45 @@ document.querySelectorAll('.button').forEach(button => {
                 // Product details container
                 const productDetails = document.createElement('div');
                 productDetails.classList.add('product-details');
-            
-                // Product title
-                const title = document.createElement('h2');
-                title.textContent = product.title+" .";
-                productDetails.appendChild(title);
-            
-                // Vendor
-                const vendor = document.createElement('p');
-                vendor.textContent = product.vendor;
-                productDetails.appendChild(vendor);
-            
+
+                const producTitleContainer= document.createElement('div');
+                producTitleContainer.classList.add('product-title-container');
+
+                productDetails.appendChild(producTitleContainer);
+                    // Product title
+                    const title = document.createElement('h2');
+                    title.textContent = product.title;
+                    producTitleContainer.appendChild(title);
+                
+                    // Vendor
+                    const vendor = document.createElement('p');
+                    vendor.textContent ="-   "+ product.vendor;
+                    producTitleContainer.appendChild(vendor);
+                
+                // Price
+                const productDescriptionContainer= document.createElement('div');
+                productDescriptionContainer.classList.add('product-description-container');
+                productDetails.appendChild(productDescriptionContainer);
+
                 // Price
                 const price = document.createElement('p');
-                price.textContent = 'Price: ' + product.price;
-                productDetails.appendChild(price);
+                price.textContent = 'Rs. ' + product.price;
+                productDescriptionContainer.appendChild(price);
             
                 // Compare at price
                 const comparePrice = document.createElement('p');
-                comparePrice.textContent = 'Compare at Price: ' + product.compare_at_price;
-                productDetails.appendChild(comparePrice);
+                comparePrice.textContent =  product.compare_at_price;
+                comparePrice.classList.add('compare-price');
+                productDescriptionContainer.appendChild(comparePrice);
             
                 // Calculate percentage off
                 const percentageOff = document.createElement('p');
                 const percentage = Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100);
-                percentageOff.textContent = 'Percentage Off: ' + percentage + '%';
-                productDetails.appendChild(percentageOff);
+                percentageOff.textContent = percentage + '% Off';
+                if (percentage > 0) {
+                    percentageOff.classList.add('percentage-off');
+                }
+                productDescriptionContainer.appendChild(percentageOff);
             
                 // Add to Cart button
                 const addToCartButton = document.createElement('button');
@@ -138,4 +151,3 @@ document.querySelectorAll('.button').forEach(button => {
         }
     });
 });
-
